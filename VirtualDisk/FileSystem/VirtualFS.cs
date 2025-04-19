@@ -34,7 +34,7 @@ namespace VirtualDisk.FileSystem
 
         public VirtualFS Start()
         {
-            var task = new Task(async () =>
+            new Task(async () =>
             {
 
                 using var logger = new ConsoleLogger("[VirtualFS]");
@@ -50,9 +50,7 @@ namespace VirtualDisk.FileSystem
                 var instance = builder.Build(this);
 
                 await instance.WaitForFileSystemClosedAsync(uint.MaxValue);
-            });
-
-            task.Start();
+            }).Start();
 
             return this;
         }

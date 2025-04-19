@@ -355,7 +355,7 @@ namespace VirtualDisk.Client
 
         public ClientResult Synchronize()
         {
-            var task = new Task(() =>
+            new Task(() =>
             {
 
                 if (Monitor.TryEnter(synLock))
@@ -373,9 +373,7 @@ namespace VirtualDisk.Client
 
                     Monitor.Exit(synLock);
                 }
-            });
-
-            task.Start();
+            }).Start();
 
             return ClientResult.Success;
         }
