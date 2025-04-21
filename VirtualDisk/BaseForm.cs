@@ -1,6 +1,7 @@
 ﻿using VirtualDisk.FileSystem;
 using VirtualDisk.Client;
 using VirtualDisk.Utils;
+using VirtualDisk.FileClient;
 
 namespace VirtualDisk
 {
@@ -12,8 +13,8 @@ namespace VirtualDisk
         {
             Storage.Write(App.Instance, "app.json");
 
-            Module<WooZoooFS>.Instance.SetCookies(App.Instance.Cookies);
-            Module<WooZoooFS>.Instance.Synchronize();
+            Module<ClientHolder>.Instance.Client?.SetCookie(App.Instance.Cookies);
+            Module<ClientHolder>.Instance.Client?.Synchronize();
         }
 
         public BaseForm()
@@ -27,9 +28,8 @@ namespace VirtualDisk
 
             cookieEdit.DataBindings.Add("Text", App.Instance, "Cookies");
 
-            Module<VirtualFS>.Instance.SetClient(Module<WooZoooFS>.Instance);
+            Module<ClientHolder>.Instance.Start<WooZoooClient>();
             DoSync();
-            Module<VirtualFS>.Instance.Start();
         }
 
         private void Icon_DoubleClick(object sender, MouseEventArgs e)
