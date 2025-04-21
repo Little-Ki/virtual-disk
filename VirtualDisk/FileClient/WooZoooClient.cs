@@ -7,7 +7,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace VirtualDisk.FileClient
 {
-    public class WooZoooClient : ExtendClient, IExtendClient
+    public class WooZoooClient : ClientTrace, IExtendClient
     {
         private readonly VirtualDir directory = new(new VirtualFile() { IsDirectory = true, Name = "root", ID = "-1" });
 
